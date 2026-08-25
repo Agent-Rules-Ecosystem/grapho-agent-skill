@@ -1,5 +1,6 @@
 # 🗺️ Path Map — Rutas Canónicas de Grapho
 
+- `.skill/grapho-agent-skill/scripts/scan_auto.py` ← **Punto de entrada principal** — Auto-detecta stack y delega al escáner correcto
 - `.skill/grapho-agent-skill/scripts/scan_flutter.py` ← Escáner Dart/Flutter
 - `.skill/grapho-agent-skill/scripts/scan_python.py` ← Escáner Python AST
 - `.skill/grapho-agent-skill/scripts/scan_typescript.py` ← Escáner JS/TS
