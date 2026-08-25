@@ -87,7 +87,7 @@ def scan_flutter_project(target_dir='.'):
     graph_data = {
         "project_name": os.path.basename(os.path.abspath(target_dir)),
         "stack": "flutter",
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now().isoformat() + "Z",
         "metrics": {
             "total_files": len(nodes),
             "total_lines": total_lines,
