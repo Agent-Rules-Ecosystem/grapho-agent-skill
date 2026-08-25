@@ -1,0 +1,6 @@
+---
+description: Rule for Grapho code analysis and architecture extraction.
+globs: ["**/overview/grapho/**", "**/*.dart", "**/*.py", "**/*.ts", "**/*.js"]
+---
+
+Use Python AST scanner scripts in `.skill/grapho-agent-skill/scripts/` to generate architecture maps deterministically.
