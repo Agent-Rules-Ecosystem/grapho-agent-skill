@@ -20,6 +20,7 @@ graph LR
 
     C --> C1["Detect Monoliths (>300 lines)"]
     C --> C2["Dependency Leak Auditor"]
+    C --> C3["Detect High Coupling (Fan-In/Fan-Out)"]
 
     D --> D1["overview/grapho/grapho_data.json"]
     E --> E1["overview/grapho/architecture.mmd"]

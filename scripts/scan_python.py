@@ -74,6 +74,30 @@ def scan_python_project(target_dir='.'):
                 except Exception:
                     pass
 
+    # Calculate coupling metrics (fan_in and fan_out)
+    fan_in_map = {n['id']: 0 for n in nodes}
+    fan_out_map = {n['id']: 0 for n in nodes}
+
+    for e in edges:
+        from_id = e['from']
+        to_id = e['to']
+        if from_id in fan_out_map:
+            fan_out_map[from_id] += 1
+        if to_id in fan_in_map:
+            fan_in_map[to_id] += 1
+
+    high_coupling_count = 0
+    for node in nodes:
+        node_id = node['id']
+        f_in = fan_in_map.get(node_id, 0)
+        f_out = fan_out_map.get(node_id, 0)
+        node['fan_in'] = f_in
+        node['fan_out'] = f_out
+        is_high_coupling = f_out > 10 or f_in > 15
+        node['is_high_coupling'] = is_high_coupling
+        if is_high_coupling:
+            high_coupling_count += 1
+
     graph_data = {
         "project_name": os.path.basename(os.path.abspath(target_dir)),
         "stack": "python",
@@ -82,7 +106,8 @@ def scan_python_project(target_dir='.'):
             "total_files": len(nodes),
             "total_lines": total_lines,
             "monolith_count": monolith_count,
-            "violations_count": violations_count
+            "violations_count": violations_count,
+            "high_coupling_count": high_coupling_count
         },
         "nodes": nodes,
         "edges": edges

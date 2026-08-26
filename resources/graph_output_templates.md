@@ -10,7 +10,8 @@ Estructura canónica del archivo `overview/grapho/grapho_data.json`:
     "total_files": 45,
     "total_lines": 4250,
     "monolith_count": 2,
-    "violations_count": 0
+    "violations_count": 0,
+    "high_coupling_count": 1
   },
   "nodes": [
     {
@@ -18,7 +19,10 @@ Estructura canónica del archivo `overview/grapho/grapho_data.json`:
       "label": "GetUserUseCase",
       "layer": "domain",
       "lines": 45,
-      "is_monolith": false
+      "is_monolith": false,
+      "fan_in": 3,
+      "fan_out": 2,
+      "is_high_coupling": false
     }
   ],
   "edges": [

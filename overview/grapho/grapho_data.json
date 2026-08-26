@@ -1,0 +1,171 @@
+{
+  "project_name": "grapho-agent-skill",
+  "stack": "python",
+  "generated_at": "2026-08-26T03:07:25.005552Z",
+  "metrics": {
+    "total_files": 5,
+    "total_lines": 516,
+    "monolith_count": 0,
+    "violations_count": 0,
+    "high_coupling_count": 0
+  },
+  "nodes": [
+    {
+      "id": "scripts/scan_typescript.py",
+      "label": "scan_typescript.py",
+      "layer": "other",
+      "lines": 123,
+      "is_monolith": false,
+      "fan_in": 0,
+      "fan_out": 5,
+      "is_high_coupling": false
+    },
+    {
+      "id": "scripts/scan_flutter.py",
+      "label": "scan_flutter.py",
+      "layer": "other",
+      "lines": 139,
+      "is_monolith": false,
+      "fan_in": 0,
+      "fan_out": 5,
+      "is_high_coupling": false
+    },
+    {
+      "id": "scripts/scan_auto.py",
+      "label": "scan_auto.py",
+      "layer": "other",
+      "lines": 68,
+      "is_monolith": false,
+      "fan_in": 0,
+      "fan_out": 3,
+      "is_high_coupling": false
+    },
+    {
+      "id": "scripts/export_mermaid.py",
+      "label": "export_mermaid.py",
+      "layer": "other",
+      "lines": 58,
+      "is_monolith": false,
+      "fan_in": 0,
+      "fan_out": 3,
+      "is_high_coupling": false
+    },
+    {
+      "id": "scripts/scan_python.py",
+      "label": "scan_python.py",
+      "layer": "other",
+      "lines": 128,
+      "is_monolith": false,
+      "fan_in": 0,
+      "fan_out": 5,
+      "is_high_coupling": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "scripts/scan_typescript.py",
+      "to": "os",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_typescript.py",
+      "to": "re",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_typescript.py",
+      "to": "sys",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_typescript.py",
+      "to": "json",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_typescript.py",
+      "to": "datetime",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_flutter.py",
+      "to": "os",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_flutter.py",
+      "to": "re",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_flutter.py",
+      "to": "sys",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_flutter.py",
+      "to": "json",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_flutter.py",
+      "to": "datetime",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_auto.py",
+      "to": "os",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_auto.py",
+      "to": "sys",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_auto.py",
+      "to": "subprocess",
+      "type": "import"
+    },
+    {
+      "from": "scripts/export_mermaid.py",
+      "to": "os",
+      "type": "import"
+    },
+    {
+      "from": "scripts/export_mermaid.py",
+      "to": "sys",
+      "type": "import"
+    },
+    {
+      "from": "scripts/export_mermaid.py",
+      "to": "json",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_python.py",
+      "to": "os",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_python.py",
+      "to": "ast",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_python.py",
+      "to": "sys",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_python.py",
+      "to": "json",
+      "type": "import"
+    },
+    {
+      "from": "scripts/scan_python.py",
+      "to": "datetime",
+      "type": "import"
+    }
+  ]
+}

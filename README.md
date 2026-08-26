@@ -19,7 +19,8 @@
 | Comando | Acción | Descripción |
 |---|---|---|
 | `$grapho` | Bootstrap | Activa la skill y ejecuta el escáner del lenguaje activo. |
-| `$grapho:audit` | Auditoría | Ejecuta el análisis AST, evalúa Clean Arch y genera `overview/work/skill/grapho.md`. |
+| `$grapho:scan` | Escaneo AST | Ejecuta el escáner AST correspondiente y actualiza `overview/grapho/grapho_data.json`. |
+| `$grapho:audit` | Auditoría | Evalúa violaciones Clean Arch, monolitos y acoplamiento en `overview/work/skill/grapho.md`. |
 | `$grapho:mermaid` | Exportar Diagrama | Convierte el grafo de dependencias a un diagrama Mermaid (`overview/grapho/architecture.mmd`). |
 | `$grapho:json` | Exportar JSON | Escribe el JSON estructurado en `overview/grapho/grapho_data.json` para ser consumido por `$grapho3d`. |
 

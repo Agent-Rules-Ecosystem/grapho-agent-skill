@@ -1,0 +1,29 @@
+graph LR
+    subgraph Other
+        scripts_scan_typescript_py["scan_typescript.py"]
+        scripts_scan_flutter_py["scan_flutter.py"]
+        scripts_scan_auto_py["scan_auto.py"]
+        scripts_export_mermaid_py["export_mermaid.py"]
+        scripts_scan_python_py["scan_python.py"]
+    end
+    scripts_scan_typescript_py --> os
+    scripts_scan_typescript_py --> re
+    scripts_scan_typescript_py --> sys
+    scripts_scan_typescript_py --> json
+    scripts_scan_typescript_py --> datetime
+    scripts_scan_flutter_py --> os
+    scripts_scan_flutter_py --> re
+    scripts_scan_flutter_py --> sys
+    scripts_scan_flutter_py --> json
+    scripts_scan_flutter_py --> datetime
+    scripts_scan_auto_py --> os
+    scripts_scan_auto_py --> sys
+    scripts_scan_auto_py --> subprocess
+    scripts_export_mermaid_py --> os
+    scripts_export_mermaid_py --> sys
+    scripts_export_mermaid_py --> json
+    scripts_scan_python_py --> os
+    scripts_scan_python_py --> ast
+    scripts_scan_python_py --> sys
+    scripts_scan_python_py --> json
+    scripts_scan_python_py --> datetime

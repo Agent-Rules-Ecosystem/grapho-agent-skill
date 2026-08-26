@@ -3,9 +3,10 @@
 ## Comandos de Análisis
 
 - `$grapho`: Auto-detecta el stack del proyecto (Dart > TS/Web > Python) y ejecuta el escáner AST correspondiente. Usa `scripts/scan_auto.py`. Prioridad de detección por conteo de extensiones.
-- `$grapho:audit`: Evalúa violaciones de Clean Arch y detecta archivos monolíticos (>300 líneas). Registra la salida en `overview/work/skill/grapho.md`.
+- `$grapho:scan`: Alias explícito para forzar el escaneo AST completo del repositorio y actualizar `overview/grapho/grapho_data.json`.
+- `$grapho:audit`: Evalúa violaciones de Clean Arch, detecta archivos monolíticos (>300 líneas) y alertas de acoplamiento. Registra la salida en `overview/work/skill/grapho.md`.
 - `$grapho:mermaid`: Genera o actualiza el diagrama Mermaid en `overview/grapho/architecture.mmd`.
-- `$grapho:json`: Exporta el JSON estructurado completo a `overview/grapho/grapho_data.json` para ser consumido por visualizadores.
+- `$grapho:json`: Exporta o verifica el JSON estructurado completo en `overview/grapho/grapho_data.json` para ser consumido por visualizadores 3D.
 
 ## Comandos de Aprendizaje y Evolución
 
