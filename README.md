@@ -18,7 +18,8 @@
 
 | Comando | Acción | Descripción |
 |---|---|---|
-| `$grapho` | Bootstrap | Activa la skill y ejecuta el escáner del lenguaje activo. |
+| `$grapho` | Bootstrap | Activa la skill, ejecuta el escáner del lenguaje activo y genera `grapho_data.json`, `architecture.mmd` y `radar.md`. |
+| `$grapho:radar` | AST Radar | Genera el índice sintético `overview/grapho/radar.md` para localización rápida de archivos durante `$work`. |
 | `$grapho:scan` | Escaneo AST | Ejecuta el escáner AST correspondiente y actualiza `overview/grapho/grapho_data.json`. |
 | `$grapho:audit` | Auditoría | Evalúa violaciones Clean Arch, monolitos y acoplamiento en `overview/work/skill/grapho.md`. |
 | `$grapho:mermaid` | Exportar Diagrama | Convierte el grafo de dependencias a un diagrama Mermaid (`overview/grapho/architecture.mmd`). |

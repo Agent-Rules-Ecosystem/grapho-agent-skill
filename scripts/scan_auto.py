@@ -60,6 +60,17 @@ def run_scanner(stack, target_dir):
     print(f"▶  Ejecutando: {os.path.basename(scanner)} {target_dir}\n")
 
     result = subprocess.run([sys.executable, scanner, target_dir])
+
+    # Automatically generate radar.md and architecture.mmd
+    json_path = os.path.join(target_dir, 'overview', 'grapho', 'grapho_data.json')
+    if os.path.exists(json_path):
+        radar_script = os.path.join(skill_dir, 'export_radar.py')
+        mermaid_script = os.path.join(skill_dir, 'export_mermaid.py')
+        if os.path.exists(radar_script):
+            subprocess.run([sys.executable, radar_script, json_path])
+        if os.path.exists(mermaid_script):
+            subprocess.run([sys.executable, mermaid_script, json_path])
+
     sys.exit(result.returncode)
 
 if __name__ == '__main__':
