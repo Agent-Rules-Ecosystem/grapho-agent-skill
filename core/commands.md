@@ -8,6 +8,9 @@
 - `$grapho:audit`: Evalúa violaciones de Clean Arch, detecta archivos monolíticos (>300 líneas) y alertas de acoplamiento. Registra la salida en `overview/work/skill/grapho.md`.
 - `$grapho:mermaid`: Genera o actualiza el diagrama Mermaid en `overview/grapho/architecture.mmd`.
 - `$grapho:json`: Exporta o verifica el JSON estructurado completo en `overview/grapho/grapho_data.json` para ser consumido por visualizadores 3D.
+- `$grapho:index`: Escanea todos los archivos Markdown con YAML Frontmatter en el repositorio y compila la base SQLite indexada `overview/grapho/knowledge.db` con soporte FTS5.
+- `$grapho:query [query/sql]`: Ejecuta consultas relacionales o búsqueda de texto completo FTS5 sobre la base de conocimiento y retorna JSON compacto quirúrgico (<100 tokens).
+- `$grapho:audit-knowledge`: Audita la integridad referencial del grafo de conocimiento (IDs duplicados, relaciones rotas y nodos huérfanos).
 
 ## Comandos de Aprendizaje y Evolución
 

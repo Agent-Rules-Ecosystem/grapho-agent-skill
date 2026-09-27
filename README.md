@@ -24,6 +24,9 @@
 | `$grapho:audit` | Auditoría | Evalúa violaciones Clean Arch, monolitos y acoplamiento en `overview/work/skill/grapho.md`. |
 | `$grapho:mermaid` | Exportar Diagrama | Convierte el grafo de dependencias a un diagrama Mermaid (`overview/grapho/architecture.mmd`). |
 | `$grapho:json` | Exportar JSON | Escribe el JSON estructurado en `overview/grapho/grapho_data.json` para ser consumido por `$grapho3d`. |
+| `$grapho:index` | Indexar Conocimiento | Parsea Markdown + YAML Frontmatter y compila SQLite local con FTS5 (`knowledge.db`). |
+| `$grapho:query` | Consulta Quirúrgica | Consulta relacional/FTS5 ultra-rápida devolviendo JSON compacto (<100 tokens). |
+| `$grapho:audit-knowledge` | Auditoría de Nodos | Detecta relaciones rotas, IDs duplicados y huérfanos en la base de conocimiento. |
 
 ---
 
