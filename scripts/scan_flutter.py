@@ -50,9 +50,17 @@ def scan_flutter_project(target_dir='.'):
                 lines = content.splitlines()
                 line_count = len(lines)
                 total_lines += line_count
+                embedded_classes = len(re.findall(r'\bclass\s+\w+', content))
+                is_pure_renderer = (
+                    'extends CustomPainter' in content
+                    and 'domain/' not in content
+                    and 'data/' not in content
+                )
                 is_monolith = line_count > 300
-                if is_monolith:
-                    monolith_count += 1
+                monolith_reason = (
+                    ('extract_embedded_models' if embedded_classes >= 3 else 'high_logic_density')
+                    if is_monolith else None
+                )
 
                 layer = classify_layer(rel_path)
                 node_id = rel_path.replace('\\', '/')
@@ -62,7 +70,10 @@ def scan_flutter_project(target_dir='.'):
                     "label": os.path.basename(file),
                     "layer": layer,
                     "lines": line_count,
-                    "is_monolith": is_monolith
+                    "embedded_classes": embedded_classes,
+                    "is_pure_renderer": is_pure_renderer,
+                    "is_monolith": is_monolith,
+                    "monolith_reason": monolith_reason,
                 })
 
                 # Scan imports
@@ -71,8 +82,11 @@ def scan_flutter_project(target_dir='.'):
                     if imp.startswith('package:') or imp.startswith('dart:'):
                         continue
                     
-                    # Resolve relative imports
-                    imported_layer = classify_layer(imp)
+                    # Resolve relative imports to normalized node_id when possible
+                    resolved_imp = os.path.normpath(
+                        os.path.join(os.path.dirname(node_id), imp)
+                    ).replace('\\', '/')
+                    imported_layer = classify_layer(resolved_imp)
                     
                     # Clean Arch Violation check: Domain importing Data or Presentation
                     if layer == 'domain' and imported_layer in ['data', 'presentation']:
@@ -80,7 +94,7 @@ def scan_flutter_project(target_dir='.'):
 
                     edges.append({
                         "from": node_id,
-                        "to": imp,
+                        "to": resolved_imp,
                         "type": "import"
                     })
 
@@ -103,8 +117,16 @@ def scan_flutter_project(target_dir='.'):
         f_out = fan_out_map.get(node_id, 0)
         node['fan_in'] = f_in
         node['fan_out'] = f_out
-        # Mark high coupling: highly coupled or heavily depended upon
-        is_high_coupling = f_out > 10 or f_in > 15
+        if node.get('is_pure_renderer') and f_out == 0:
+            node['is_monolith'] = False
+            node['monolith_reason'] = None
+        if node.get('is_monolith'):
+            monolith_count += 1
+        # Categorize architectural role to avoid flagging intentional coupling (routers/adapters/interfaces)
+        id_lower = node_id.lower()
+        is_by_design = any(tok in id_lower for tok in ('router', 'routes', 'adapter', 'repository', 'interface'))
+        node['coupling_role'] = 'by_design' if is_by_design else 'accidental'
+        is_high_coupling = (f_out > 10 or f_in > 15) and not is_by_design
         node['is_high_coupling'] = is_high_coupling
         if is_high_coupling:
             high_coupling_count += 1

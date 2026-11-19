@@ -151,13 +151,13 @@ def scan_repository(root_dir, scan_dirs=None, db_path="overview/grapho/knowledge
     conn = init_db(db_path)
     cursor = conn.cursor()
     
-    # Clear previous indexed records
+    # Clear previous indexed records (FTS5 external content must clear via delete-all before nodes)
+    cursor.execute("INSERT INTO nodes_fts(nodes_fts) VALUES('delete-all')")
     cursor.execute("DELETE FROM nodes")
     cursor.execute("DELETE FROM relations")
     cursor.execute("DELETE FROM constants")
-    cursor.execute("DELETE FROM nodes_fts")
     
-    default_dirs = ["overview", "docs", "knowledge", "00_Nucleo", "01_Lore", "02_Sistema", "03_Entidades", "04_Web3"]
+    default_dirs = ["overview", "docs", "knowledge", "vault"]
     target_dirs = scan_dirs if scan_dirs else default_dirs
     
     scanned_files = 0

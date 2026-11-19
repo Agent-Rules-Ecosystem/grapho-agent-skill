@@ -11,3 +11,4 @@ __pycache__/
 # Temporary Debris
 *.tmp
 *.log
+overview/

@@ -5,6 +5,7 @@ export_mermaid.py — Converts overview/grapho/grapho_data.json into a clean Mer
 
 import os
 import sys
+import re
 import json
 
 def json_to_mermaid(json_path):
@@ -20,17 +21,25 @@ def json_to_mermaid(json_path):
 
     mermaid_lines = ["graph LR"]
 
-    # Group by layers
+    # Group by layers (and 2nd-level subdir for large multi-app bundles > 300 nodes)
+    large_bundle = len(nodes) > 300
     layers = {}
     for node in nodes:
         layer = node.get('layer', 'other')
-        if layer not in layers:
-            layers[layer] = []
-        layers[layer].append(node)
+        if large_bundle:
+            parts = [p for p in node['id'].replace('\\', '/').split('/') if p]
+            if len(parts) >= 3:
+                group_key = f"{layer}_{parts[1]}"
+            else:
+                group_key = layer
+        else:
+            group_key = layer
+        layers.setdefault(group_key, []).append(node)
 
-    for layer, layer_nodes in layers.items():
-        layer_title = layer.capitalize()
-        mermaid_lines.append(f"    subgraph {layer_title}")
+    for group_key, layer_nodes in layers.items():
+        layer_id = re.sub(r'[^A-Za-z0-9_]', '_', group_key)
+        layer_title = group_key.replace('_', ' ').capitalize()
+        mermaid_lines.append(f'    subgraph {layer_id}["{layer_title}"]')
         for n in layer_nodes:
             node_id = n['id'].replace('/', '_').replace('.', '_').replace('-', '_')
             label = n['label']

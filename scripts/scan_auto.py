@@ -17,7 +17,7 @@ def detect_stack(target_dir='.'):
         # Exclude noise directories
         dirs[:] = [d for d in dirs if d not in (
             'node_modules', '.next', 'dist', 'build', '.git',
-            '__pycache__', 'venv', '.venv', '.dart_tool', 'build'
+            '__pycache__', 'venv', '.venv', '.dart_tool', '.skill', '.agents'
         )]
         for f in files:
             ext = f.rsplit('.', 1)[-1].lower()
@@ -30,6 +30,9 @@ def detect_stack(target_dir='.'):
 
     print(f"🔍 [Grapho Auto-Detect] Archivos encontrados → Dart: {dart_total} | Web/TS: {web_total} | Python: {python_total}")
 
+    if dart_total == 0 and web_total == 0 and python_total == 0:
+        print("❌ [Grapho Auto-Detect] No se encontraron archivos Dart, Web/TS ni Python en el directorio objetivo.")
+        sys.exit(1)
     if dart_total >= web_total and dart_total >= python_total:
         return 'flutter'
     elif web_total >= python_total:
